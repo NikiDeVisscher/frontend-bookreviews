@@ -2,35 +2,34 @@
 
 <h1>Books</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Genre</th>
-      <th>Pages</th>
-      <th>Language</th>
-      <th>Publisher</th>
-      <th>Published</th>
+<DataTable
+  @content={{@model}}
+  this.sort={{this.sort}}
+  @page={{this.page}}
+  @size={{this.size}}
+  @onClickRow={{this.navigate}}
+  as |t|>
+  <t.content as |c|>
+    <c.header>
+      {{!-- template-lint-disable no-curly-component-invocation --}}
+      {{th-sortable field='title' currentSorting=this.sort label='Title'}}
+      {{th-sortable field='genre' currentSorting=this.sort label='Genre'}}
+      {{th-sortable field='pages' currentSorting=this.sort label='Pages'}}
+      {{th-sortable field='language' currentSorting=this.sort label='Language'}}
+      {{th-sortable field='publisher' currentSorting=this.sort label='Publisher'}}
+      {{th-sortable field='date' currentSorting=this.sort label='Published'}}
       <th>ISBN</th>
-      <th>Average Rating</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each @model as |book|}}
-      <tr>
-        <td>
-          <LinkTo @route="book" @model={{book.id}}>
-            {{book.title}}
-          </LinkTo>
-        </td>
-        <td>{{book.genre}}</td>
-        <td>{{book.pages}}</td>
-        <td>{{book.language}}</td>
-        <td>{{book.publisher}}</td>
-        <td>{{book.date}}</td>
-        <td>{{book.isbn}}</td>
-        <td>{{book.averagerating}}</td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+      {{th-sortable field='averagerating' currentSorting=this.sort label='Average Rating'}}
+    </c.header>
+    <c.body as |row|>
+      <td>{{row.title}}</td>
+      <td>{{row.genre}}</td>
+      <td>{{row.pages}}</td>
+      <td>{{row.language}}</td>
+      <td>{{row.publisher}}</td>
+      <td>{{row.date}}</td>
+      <td>{{row.isbn}}</td>
+      <td>{{row.averagerating}}</td>
+    </c.body>
+  </t.content>
+</DataTable>
