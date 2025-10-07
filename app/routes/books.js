@@ -8,7 +8,7 @@ export default class BooksRoute extends Route.extend(DataTableRouteMixin) {
 
   @service store;
 
-  async model() {
-    return this.store.findAll('book');
+  async model(params) {
+    return this.store.findAll('book', params);
   }
 }
