@@ -1,1 +1,12 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+table,
+td,
+th {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+td,
+th {
+  padding: 10px;
+}

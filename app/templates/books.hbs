@@ -2,8 +2,35 @@
 
 <h1>Books</h1>
 
-<ul>
-  {{#each @model as |book|}}
-    <li>{{book.title}}</li>
-  {{/each}}
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Genre</th>
+      <th>Pages</th>
+      <th>Language</th>
+      <th>Publisher</th>
+      <th>Published</th>
+      <th>ISBN</th>
+      <th>Average Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each @model as |book|}}
+      <tr>
+        <td>
+          <LinkTo @route="book" @model={{book.id}}>
+            {{book.title}}
+          </LinkTo>
+        </td>
+        <td>{{book.genre}}</td>
+        <td>{{book.pages}}</td>
+        <td>{{book.language}}</td>
+        <td>{{book.publisher}}</td>
+        <td>{{book.date}}</td>
+        <td>{{book.isbn}}</td>
+        <td>{{book.averagerating}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

@@ -1,7 +1,6 @@
 {{page-title "FrontendBookreviews"}}
 
-{{outlet}}
+<LinkTo @route="index">Home</LinkTo>
+<LinkTo @route="books">Show all books</LinkTo>
 
-{{! The following component displays Ember's default welcome message. }}
-<WelcomePage />
-{{! Feel free to remove this! }}
+{{outlet}}
