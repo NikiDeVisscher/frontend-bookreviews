@@ -1,0 +1,14 @@
+import Model, { attr, hasMany } from '@ember-data/model';
+
+export default class BookModel extends Model {
+  @attr('string') title;
+  @hasMany('author', { async: true, inverse: null }) authors;
+  @hasMany('review', { async: true, inverse: null }) reviews;
+  @attr('string') genre;
+  @attr('number') pages;
+  @attr('string') language;
+  @attr('string') publisher;
+  @attr('date') published;
+  @attr('string') isbn;
+  @attr('number') averageRating;
+}
