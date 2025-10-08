@@ -13,6 +13,7 @@
     <c.header>
       {{!-- template-lint-disable no-curly-component-invocation --}}
       {{th-sortable field='title' currentSorting=this.sort label='Title'}}
+      {{th-sortable field='authors' currentSorting=this.sort label='Authors'}}
       {{th-sortable field='genre' currentSorting=this.sort label='Genre'}}
       {{th-sortable field='pages' currentSorting=this.sort label='Pages'}}
       {{th-sortable field='language' currentSorting=this.sort label='Language'}}
@@ -23,6 +24,11 @@
     </c.header>
     <c.body as |row|>
       <td>{{row.title}}</td>
+      <td>
+        {{#each row.authors as |author|}}
+          {{author.name}}{{unless @last ", "}}
+        {{/each}}
+      </td>
       <td>{{row.genre}}</td>
       <td>{{row.pages}}</td>
       <td>{{row.language}}</td>
