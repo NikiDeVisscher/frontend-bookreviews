@@ -8,4 +8,11 @@
   <li>Published: {{@book.date}}</li>
   <li>ISBN: {{@book.isbn}}</li>
   <li>Average Rating: {{@book.averagerating}}</li>
+  <li>Authors:
+    <ul>
+      {{#each @book.authors as |author|}}
+        <li>{{author.name}}</li>
+      {{/each}}
+    </ul>
+  </li>
 </ul>
