@@ -10,3 +10,22 @@ td,
 th {
   padding: 10px;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+.form label {
+  font-weight: bold;
+}
+
+.form input,
+.form textarea {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
