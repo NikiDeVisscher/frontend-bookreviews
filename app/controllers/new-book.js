@@ -1,14 +1,49 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 export default class NewBookController extends Controller {
   @service store;
   @service router;
 
+  @tracked filteredAuthors = [];
+  @tracked selectedAuthors = [];
+
   @action
   updateField(field, event) {
     this.newBook[field] = event.target.value;
+  }
+
+  @action async searchAuthors(e) {
+    const query = e.target.value.trim().toLowerCase();
+    if (!query) {
+      this.filteredAuthors = [];
+      return;
+    }
+
+    const allAuthors = await this.store.findAll('author');
+    this.filteredAuthors = allAuthors.filter((author) =>
+      author.name.toLowerCase().includes(query),
+    );
+  }
+
+  @action selectAuthors(event) {
+    const selectedIds = Array.from(event.target.selectedOptions).map(
+      (opt) => opt.value,
+    );
+    const allAuthors = this.store.peekAll('author');
+    const selectedAuthor = allAuthors.filter((author) =>
+      selectedIds.includes(author.id),
+    );
+    this.addAuthor(selectedAuthor[0]);
+  }
+
+  addAuthor(author) {
+    if (!this.selectedAuthors.includes(author)) {
+      this.selectedAuthors = [...this.selectedAuthors, author];
+    }
+    this.filteredAuthors = [];
   }
 
   @action
@@ -16,6 +51,7 @@ export default class NewBookController extends Controller {
     try {
       let book = this.store.createRecord('book', {
         title: this.newBook.title,
+        authors: this.selectedAuthors,
         genre: this.newBook.genre,
         pages: Number(this.newBook.pages),
         language: this.newBook.language,
