@@ -4,7 +4,7 @@ import { service } from '@ember/service';
 export default class BookRoute extends Route {
   @service store;
 
-  model(params) {
-    return this.store.findRecord('book', params.id);
+  async model(params) {
+    return await this.store.findRecord('book', params.id);
   }
 }

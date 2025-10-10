@@ -11,18 +11,23 @@
   as |t|>
   <t.content as |c|>
     <c.header>
-      {{!-- template-lint-disable no-curly-component-invocation --}}
-      {{th-sortable field='title' currentSorting=this.sort label='Title'}}
-      {{th-sortable field='genre' currentSorting=this.sort label='Genre'}}
-      {{th-sortable field='pages' currentSorting=this.sort label='Pages'}}
-      {{th-sortable field='language' currentSorting=this.sort label='Language'}}
-      {{th-sortable field='publisher' currentSorting=this.sort label='Publisher'}}
-      {{th-sortable field='date' currentSorting=this.sort label='Published'}}
+      <ThSortable @field='title' @currentSorting={{this.sort}} @label='Title' />
+      <ThSortable @field='authors' @currentSorting={{this.sort}} @label='Authors' />
+      <ThSortable @field='genre' @currentSorting={{this.sort}} @label='Genre' />
+      <ThSortable @field='pages' @currentSorting={{this.sort}} @label='Pages' />
+      <ThSortable @field='language' @currentSorting={{this.sort}} @label='Language' />
+      <ThSortable @field='publisher' @currentSorting={{this.sort}} @label='Publisher' />
+      <ThSortable @field='date' @currentSorting={{this.sort}} @label='Published' />
       <th>ISBN</th>
-      {{th-sortable field='averagerating' currentSorting=this.sort label='Average Rating'}}
+      <ThSortable @field='averagerating' @currentSorting={{this.sort}} @label='Average Rating' />
     </c.header>
     <c.body as |row|>
       <td>{{row.title}}</td>
+      <td>
+        {{#each row.authors as |author index|}}
+          {{author.name}}{{if (is-not-last index row.authors) ", "}}
+        {{/each}}
+      </td>
       <td>{{row.genre}}</td>
       <td>{{row.pages}}</td>
       <td>{{row.language}}</td>
