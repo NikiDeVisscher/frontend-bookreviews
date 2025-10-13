@@ -1,2 +1,62 @@
-{{page-title "Edit"}}
-{{outlet}}
+{{page-title "Edit book"}}
+
+<div class="form">
+  <label for="title">Title:</label>
+  <input
+    id="title"
+    type="text"
+    value={{@model.title}}
+    {{on "input" (fn (mut @model.title) value="target.value")}}
+  />
+
+  <label for="language">Language:</label>
+  <input
+    id="language"
+    type="text"
+    value={{@model.language}}
+    {{on "input" (fn (mut @model.language) value="target.value")}}
+  />
+
+  <label for="genre">Genre:</label>
+  <input
+    id="genre"
+    type="text"
+    value={{@model.genre}}
+    {{on "input" (fn (mut @model.genre) value="target.value")}}
+  />
+
+  <label for="pages">Pages:</label>
+  <input
+    id="pages"
+    type="number"
+    value={{@model.pages}}
+    {{on "input" (fn (mut @model.pages) value="target.value")}}
+  />
+
+  <label for="publisher">Publisher:</label>
+  <input
+    id="publisher"
+    type="text"
+    value={{@model.publisher}}
+    {{on "input" (fn (mut @model.publisher) value="target.value")}}
+  />
+
+  <label for="date">Published on:</label>
+  <input
+    id="date"
+    type="date"
+    value={{@model.date}}
+    {{on "input" (fn (mut @model.date) value="target.value")}}
+  />
+
+  <label for="isbn">ISBN:</label>
+  <input
+    id="isbn"
+    type="text"
+    value={{@model.isbn}}
+    {{on "input" (fn (mut @model.isbn) value="target.value")}}
+  />
+
+  <button type="button" {{on "click" this.saveBook}}>Save Changes</button>
+  <button type="button" {{on "click" this.cancel}}>Cancel</button>
+</div>
