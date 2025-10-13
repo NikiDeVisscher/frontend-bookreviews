@@ -9,13 +9,20 @@ export default class NewBookController extends Controller {
 
   @tracked filteredAuthors = [];
   @tracked selectedAuthors = [];
+  @tracked showAddAuthor = false;
+
+  @action
+  toggleAddAuthor() {
+    this.showAddAuthor = !this.showAddAuthor;
+  }
 
   @action
   updateField(field, event) {
     this.newBook[field] = event.target.value;
   }
 
-  @action async searchAuthors(e) {
+  @action
+  async searchAuthors(e) {
     const query = e.target.value.trim().toLowerCase();
     if (!query) {
       this.filteredAuthors = [];
@@ -28,7 +35,8 @@ export default class NewBookController extends Controller {
     );
   }
 
-  @action selectAuthors(event) {
+  @action
+  selectAuthors(event) {
     const selectedIds = Array.from(event.target.selectedOptions).map(
       (opt) => opt.value,
     );
@@ -39,6 +47,7 @@ export default class NewBookController extends Controller {
     this.addAuthor(selectedAuthor[0]);
   }
 
+  @action
   addAuthor(author) {
     if (!this.selectedAuthors.includes(author)) {
       this.selectedAuthors = [...this.selectedAuthors, author];
