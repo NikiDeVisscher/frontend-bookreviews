@@ -21,7 +21,6 @@
       id="author-select"
       multiple
       size="5"
-      class="border rounded p-2 w-full bg-white shadow"
       {{on "change" this.selectAuthors}}
     >
       {{#each this.filteredAuthors as |author|}}
@@ -63,7 +62,18 @@
   {{/if}}
 
   <label for="language">Language:</label>
-  <input id="language" type="text" {{on "input" (fn this.updateField "language")}} />
+  <input id="language" type="text" value={{this.selectedLanguage}} {{on "input" (fn this.updateField "language")}} />
+  <select
+    id="language-select"
+    size="5"
+    {{on "change" this.selectLanguage}}
+  >
+    {{#each this.languages as |language|}}
+      <option value={{language}}>
+        {{language}}
+      </option>
+    {{/each}}
+  </select>
   {{#if this.errors.language}}
     <span class="error-message">{{this.errors.language}}</span>
   {{/if}}

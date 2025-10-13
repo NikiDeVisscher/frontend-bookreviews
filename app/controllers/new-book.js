@@ -7,11 +7,34 @@ export default class NewBookController extends Controller {
   @service store;
   @service router;
 
+  @tracked languages = [
+    'English',
+    'Dutch',
+    'French',
+    'Spanish',
+    'German',
+    'Japanese',
+    'Ukrainian',
+    'Italian',
+    'Portuguese',
+    'Arabic',
+  ];
+  @tracked selectedLanguage = '';
+  @tracked newBook = {};
   @tracked filteredAuthors = [];
   @tracked selectedAuthors = [];
   @tracked showAddAuthor = false;
   @tracked authorSearch = '';
   @tracked errors = {};
+
+  @action
+  selectLanguage(event) {
+    const selectedOption = event.target.value;
+    if (this.languages.includes(selectedOption)) {
+      this.selectedLanguage = selectedOption;
+      this.newBook.language = selectedOption;
+    }
+  }
 
   @action
   toggleAddAuthor() {
