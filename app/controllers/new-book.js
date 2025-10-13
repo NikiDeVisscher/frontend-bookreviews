@@ -121,5 +121,7 @@ export default class NewBookController extends Controller {
     if (Object.keys(this.errors).length) {
       return false;
     }
+
+    return true;
   }
 }
