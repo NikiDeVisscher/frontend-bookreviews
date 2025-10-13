@@ -7,7 +7,7 @@ export default class NewBookController extends Controller {
   @service store;
   @service router;
 
-  @tracked languages = [
+  languages = [
     'English',
     'Dutch',
     'French',
@@ -19,6 +19,7 @@ export default class NewBookController extends Controller {
     'Portuguese',
     'Arabic',
   ];
+
   @tracked selectedLanguage = '';
   @tracked newBook = {};
   @tracked filteredAuthors = [];
