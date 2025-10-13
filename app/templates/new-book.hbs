@@ -3,6 +3,9 @@
 <div class="form">
   <label for="title">Title:</label>
   <input id="title" type="text" {{on "input" (fn this.updateField "title")}} />
+  {{#if this.errors.title}}
+    <span class="error-message">{{this.errors.title}}</span>
+  {{/if}}
 
   <label for="author">Author(s):</label>
   <input
@@ -43,23 +46,45 @@
     <AddAuthor @onAdd={{this.addNewAuthor}} />
   {{/if}}
 
+  {{#if this.errors.authors}}
+    <span class="error-message">{{this.errors.authors}}</span>
+  {{/if}}
+
   <label for="genre">Genre:</label>
   <input id="genre" type="text" {{on "input" (fn this.updateField "genre")}} />
+  {{#if this.errors.genre}}
+    <span class="error-message">{{this.errors.genre}}</span>
+  {{/if}}
 
   <label for="pages">Pages:</label>
   <input id="pages" type="number" {{on "input" (fn this.updateField "pages")}} />
+  {{#if this.errors.pages}}
+    <span class="error-message">{{this.errors.pages}}</span>
+  {{/if}}
 
   <label for="language">Language:</label>
   <input id="language" type="text" {{on "input" (fn this.updateField "language")}} />
+  {{#if this.errors.language}}
+    <span class="error-message">{{this.errors.language}}</span>
+  {{/if}}
 
   <label for="publisher">Publisher:</label>
   <input id="publisher" type="text" {{on "input" (fn this.updateField "publisher")}} />
+  {{#if this.errors.publisher}}
+    <span class="error-message">{{this.errors.publisher}}</span>
+  {{/if}}
 
   <label for="date">Published on:</label>
   <input id="date" type="date" {{on "input" (fn this.updateField "date")}} />
+  {{#if this.errors.date}}
+    <span class="error-message">{{this.errors.date}}</span>
+  {{/if}}
 
   <label for="isbn">ISBN:</label>
   <input id="isbn" type="text" {{on "input" (fn this.updateField "isbn")}} />
+  {{#if this.errors.isbn}}
+    <span class="error-message">{{this.errors.isbn}}</span>
+  {{/if}}
 
   <button type="button" {{on "click" this.addBook}}>Add Book</button>
 </div>

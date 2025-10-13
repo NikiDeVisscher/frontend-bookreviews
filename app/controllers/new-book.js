@@ -11,6 +11,7 @@ export default class NewBookController extends Controller {
   @tracked selectedAuthors = [];
   @tracked showAddAuthor = false;
   @tracked authorSearch = '';
+  @tracked errors = {};
 
   @action
   toggleAddAuthor() {
@@ -66,6 +67,10 @@ export default class NewBookController extends Controller {
 
   @action
   async addBook() {
+    if (!this.validate()) {
+      return;
+    }
+
     try {
       let book = this.store.createRecord('book', {
         title: this.newBook.title,
@@ -82,6 +87,39 @@ export default class NewBookController extends Controller {
       this.router.transitionTo('books');
     } catch (e) {
       console.error('Error saving book:', e);
+    }
+  }
+
+  validate() {
+    this.errors = {};
+
+    if (!this.newBook.title) {
+      this.errors.title = 'Title is required';
+    }
+    if (!this.selectedAuthors.length) {
+      this.errors.authors = 'At least one author is required';
+    }
+    if (!this.newBook.genre) {
+      this.errors.genre = 'Genre is required';
+    }
+    if (!this.newBook.pages || isNaN(Number(this.newBook.pages))) {
+      this.errors.pages = 'Pages must be a number';
+    }
+    if (!this.newBook.language) {
+      this.errors.language = 'Language is required';
+    }
+    if (!this.newBook.publisher) {
+      this.errors.publisher = 'Publisher is required';
+    }
+    if (!this.newBook.date) {
+      this.errors.date = 'Date is required';
+    }
+    if (!this.newBook.isbn) {
+      this.errors.isbn = 'ISBN is required';
+    }
+
+    if (Object.keys(this.errors).length) {
+      return false;
     }
   }
 }
