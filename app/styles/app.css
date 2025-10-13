@@ -11,6 +11,10 @@ th {
   padding: 10px;
 }
 
+button {
+  cursor: pointer;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -30,6 +34,15 @@ th {
   border-radius: 4px;
 }
 
-.hidden {
-  display: none;
+.secondary-form {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.secondary-form label {
+  font-weight: bold;
+  font-size: 14px;
 }

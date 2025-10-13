@@ -10,6 +10,7 @@ export default class NewBookController extends Controller {
   @tracked filteredAuthors = [];
   @tracked selectedAuthors = [];
   @tracked showAddAuthor = false;
+  @tracked authorSearch = '';
 
   @action
   toggleAddAuthor() {
@@ -45,6 +46,14 @@ export default class NewBookController extends Controller {
       selectedIds.includes(author.id),
     );
     this.addAuthor(selectedAuthor[0]);
+    this.authorSearch = '';
+    event.target.value = '';
+  }
+
+  @action
+  addNewAuthor(author) {
+    this.addAuthor(author);
+    this.toggleAddAuthor();
   }
 
   @action

@@ -5,7 +5,13 @@
   <input id="title" type="text" {{on "input" (fn this.updateField "title")}} />
 
   <label for="author">Author(s):</label>
-  <input id="author" type="text" placeholder="Search authors..." {{on "input" this.searchAuthors}} />
+  <input
+    id="author"
+    type="text"
+    placeholder="Search authors..."
+    value={{this.authorSearch}}
+    {{on "input" this.searchAuthors}}
+  />
 
   {{#if this.filteredAuthors.length}}
     <select
@@ -34,7 +40,7 @@
   <button type="button" {{on "click" this.toggleAddAuthor}}>Add a new author</button>
 
   {{#if this.showAddAuthor}}
-    <AddAuthor @onAdd={{this.addAuthor}} />
+    <AddAuthor @onAdd={{this.addNewAuthor}} />
   {{/if}}
 
   <label for="genre">Genre:</label>
