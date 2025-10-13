@@ -14,8 +14,19 @@
     id="language"
     type="text"
     value={{@model.language}}
-    {{on "input" (fn (mut @model.language) value="target.value")}}
+    readonly
   />
+  <select
+    id="language-select"
+    size="5"
+    {{on "change" (fn (mut @model.language) value="target.value")}}
+  >
+    {{#each this.languages as |language|}}
+      <option value={{language}}>
+        {{language}}
+      </option>
+    {{/each}}
+  </select>
 
   <label for="genre">Genre:</label>
   <input
