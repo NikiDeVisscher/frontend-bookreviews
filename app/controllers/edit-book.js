@@ -1,9 +1,12 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 export default class EditBookController extends Controller {
   @service router;
+
+  @tracked published = this.formatDate(this.model.date);
 
   languages = [
     'English',
@@ -17,6 +20,10 @@ export default class EditBookController extends Controller {
     'Portuguese',
     'Arabic',
   ];
+
+  formatDate(date) {
+    return date.toISOString().split('T')[0];
+  }
 
   @action
   async saveBook() {

@@ -56,7 +56,7 @@
   <input
     id="date"
     type="date"
-    value={{@model.date}}
+    value={{this.published}}
     {{on "input" (fn (mut @model.date) value="target.value")}}
   />
 
