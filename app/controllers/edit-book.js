@@ -8,6 +8,7 @@ export default class EditBookController extends Controller {
 
   @tracked published = this.formatDate(this.model.date);
   @tracked editingAuthor = null;
+  @tracked authors = {};
   @tracked errors = {};
 
   languages = [
@@ -34,7 +35,11 @@ export default class EditBookController extends Controller {
 
   @action
   removeAuthor(author) {
-    console.log('Remove author:', author);
+    this.model.authors.then((authors) => {
+      this.authors = [...authors];
+      this.authors = this.authors.filter((a) => a.id !== author.id);
+      this.model.authors = this.authors;
+    });
   }
 
   @action
@@ -77,9 +82,9 @@ export default class EditBookController extends Controller {
     if (!this.model.title) {
       this.errors.title = 'Title is required';
     }
-    /*if (!this.selectedAuthors.length) {
+    if (!this.authors.length) {
       this.errors.authors = 'At least one author is required';
-    }*/
+    }
     if (!this.model.genre) {
       this.errors.genre = 'Genre is required';
     }
