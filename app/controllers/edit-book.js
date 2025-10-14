@@ -5,14 +5,20 @@ import { tracked } from '@glimmer/tracking';
 
 export default class EditBookController extends Controller {
   @service router;
+  @service store;
 
   @tracked published = this.formatDate(this.model.date);
   @tracked editingAuthor = null;
   @tracked authors = {};
   @tracked removedAuthors = {};
-  @tracked showAddAuthor = false;
-  @tracked errors = {};
   @tracked editedAuthors = [];
+  @tracked errors = {};
+
+  @tracked authorSearch = '';
+  @tracked filteredAuthors = [];
+
+  @tracked showAddAuthor = false;
+  @tracked showSelectAuthor = false;
 
   languages = [
     'English',
@@ -79,11 +85,47 @@ export default class EditBookController extends Controller {
   }
 
   @action
+  toggleSelectAuthor() {
+    this.showSelectAuthor = !this.showSelectAuthor;
+  }
+
+  @action
   addNewAuthor(author) {
     if (!this.authors.includes(author)) {
       this.authors = [...this.authors, author];
     }
     this.toggleAddAuthor();
+  }
+
+  @action
+  async searchAuthors(e) {
+    const query = e.target.value.trim().toLowerCase();
+    if (!query) {
+      this.filteredAuthors = [];
+      return;
+    }
+
+    const allAuthors = await this.store.findAll('author');
+    this.filteredAuthors = allAuthors.filter((author) =>
+      author.name.toLowerCase().includes(query),
+    );
+  }
+
+  @action
+  selectAuthors(event) {
+    const selectedIds = Array.from(event.target.selectedOptions).map(
+      (opt) => opt.value,
+    );
+    const allAuthors = this.store.peekAll('author');
+    const selectedAuthor = allAuthors.filter((author) =>
+      selectedIds.includes(author.id),
+    );
+    if (!this.authors.includes(selectedAuthor[0])) {
+      this.authors = [...this.authors, selectedAuthor[0]];
+    }
+    this.authorSearch = '';
+    event.target.value = '';
+    this.toggleSelectAuthor();
   }
 
   @action

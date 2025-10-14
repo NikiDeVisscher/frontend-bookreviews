@@ -29,10 +29,38 @@
       {{/each}}
     </ul>
   {{/if}}
+
+  <button type="button" {{on "click" this.toggleSelectAuthor}}>Add an existing author</button>
   <button type="button" {{on "click" this.toggleAddAuthor}}>Add a new author</button>
+
+  {{#if this.showSelectAuthor}}
+    <input
+      id="author"
+      type="text"
+      placeholder="Search authors..."
+      value={{this.authorSearch}}
+      {{on "input" this.searchAuthors}}
+    />
+    <select
+      id="author-select"
+      multiple
+      size="5"
+      {{on "change" this.selectAuthors}}
+    >
+      {{#each this.filteredAuthors as |author|}}
+        <option value={{author.id}}>
+          {{author.name}}
+        </option>
+      {{/each}}
+    </select>
+  {{/if}}
 
   {{#if this.showAddAuthor}}
     <AddAuthor @onAdd={{this.addNewAuthor}} />
+  {{/if}}
+
+  {{#if this.errors.authors}}
+    <span class="error-message">{{this.errors.authors}}</span>
   {{/if}}
 
   <label for="language">Language:</label>
