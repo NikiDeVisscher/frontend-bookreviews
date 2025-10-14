@@ -10,7 +10,9 @@ export default class EditBookController extends Controller {
   @tracked editingAuthor = null;
   @tracked authors = {};
   @tracked removedAuthors = {};
+  @tracked showAddAuthor = false;
   @tracked errors = {};
+  @tracked editedAuthors = [];
 
   languages = [
     'English',
@@ -66,6 +68,22 @@ export default class EditBookController extends Controller {
   async updateAuthor(author) {
     this.editingAuthor = null;
     this.authors = this.authors.map((a) => (a.id === author.id ? author : a));
+    if (!this.editedAuthors.includes(author)) {
+      this.editedAuthors = [...this.editedAuthors, author];
+    }
+  }
+
+  @action
+  toggleAddAuthor() {
+    this.showAddAuthor = !this.showAddAuthor;
+  }
+
+  @action
+  addNewAuthor(author) {
+    if (!this.authors.includes(author)) {
+      this.authors = [...this.authors, author];
+    }
+    this.toggleAddAuthor();
   }
 
   @action
@@ -81,7 +99,9 @@ export default class EditBookController extends Controller {
       }
 
       for (let author of this.authors) {
-        await author.save();
+        if (this.editedAuthors.includes(author)) {
+          await author.save();
+        }
       }
 
       for (let author in this.removedAuthors) {

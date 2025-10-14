@@ -13,13 +13,13 @@
   {{/if}}
 
   <label for="author">Author(s):</label>
-  <ul>
-    {{#if this.editingAuthor}}
-      <EditAuthor
-        @author={{this.editingAuthor}}
-        @onUpdate={{this.updateAuthor}}
-      />
-    {{else}}
+  {{#if this.editingAuthor}}
+    <EditAuthor
+      @author={{this.editingAuthor}}
+      @onUpdate={{this.updateAuthor}}
+    />
+  {{else}}
+    <ul>
       {{#each this.authors as |author|}}
         <li>
           {{author.name}}
@@ -27,8 +27,13 @@
           <button type="button" {{on "click" (fn this.removeAuthor author)}}>Remove</button>
         </li>
       {{/each}}
-    {{/if}}
-  </ul>
+    </ul>
+  {{/if}}
+  <button type="button" {{on "click" this.toggleAddAuthor}}>Add a new author</button>
+
+  {{#if this.showAddAuthor}}
+    <AddAuthor @onAdd={{this.addNewAuthor}} />
+  {{/if}}
 
   <label for="language">Language:</label>
   <input
