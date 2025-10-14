@@ -7,6 +7,7 @@ export default class EditBookController extends Controller {
   @service router;
 
   @tracked published = this.formatDate(this.model.date);
+  @tracked editingAuthor = null;
   @tracked errors = {};
 
   languages = [
@@ -24,6 +25,26 @@ export default class EditBookController extends Controller {
 
   formatDate(date) {
     return date.toISOString().split('T')[0];
+  }
+
+  @action
+  editAuthor(author) {
+    this.editingAuthor = author;
+  }
+
+  @action
+  removeAuthor(author) {
+    console.log('Remove author:', author);
+  }
+
+  @action
+  async updateAuthor(author) {
+    this.editingAuthor = null;
+    try {
+      await author.save();
+    } catch (error) {
+      console.error('Error updating author:', error);
+    }
   }
 
   @action
