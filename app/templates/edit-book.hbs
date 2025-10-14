@@ -6,8 +6,11 @@
     id="title"
     type="text"
     value={{@model.title}}
-    {{on "input" (fn (mut @model.title) value="target.value")}}
+    {{on "input" (fn this.updateField "title")}}
   />
+  {{#if this.errors.title}}
+    <span class="error-message">{{this.errors.title}}</span>
+  {{/if}}
 
   <label for="language">Language:</label>
   <input
@@ -19,7 +22,7 @@
   <select
     id="language-select"
     size="5"
-    {{on "change" (fn (mut @model.language) value="target.value")}}
+    {{on "change" (fn this.updateField "language")}}
   >
     {{#each this.languages as |language|}}
       <option value={{language}}>
@@ -27,47 +30,65 @@
       </option>
     {{/each}}
   </select>
+  {{#if this.errors.language}}
+    <span class="error-message">{{this.errors.language}}</span>
+  {{/if}}
 
   <label for="genre">Genre:</label>
   <input
     id="genre"
     type="text"
     value={{@model.genre}}
-    {{on "input" (fn (mut @model.genre) value="target.value")}}
+    {{on "change" (fn this.updateField "genre")}}
   />
+  {{#if this.errors.genre}}
+    <span class="error-message">{{this.errors.genre}}</span>
+  {{/if}}
 
   <label for="pages">Pages:</label>
   <input
     id="pages"
     type="number"
     value={{@model.pages}}
-    {{on "input" (fn (mut @model.pages) value="target.value")}}
+    {{on "change" (fn this.updateField "pages")}}
   />
+  {{#if this.errors.pages}}
+    <span class="error-message">{{this.errors.pages}}</span>
+  {{/if}}
 
   <label for="publisher">Publisher:</label>
   <input
     id="publisher"
     type="text"
     value={{@model.publisher}}
-    {{on "input" (fn (mut @model.publisher) value="target.value")}}
+    {{on "change" (fn this.updateField "publisher")}}
   />
+  {{#if this.errors.publisher}}
+    <span class="error-message">{{this.errors.publisher}}</span>
+  {{/if}}
 
   <label for="date">Published on:</label>
   <input
     id="date"
     type="date"
     value={{this.published}}
-    {{on "input" (fn (mut @model.date) value="target.value")}}
+    {{on "change" (fn this.updateField "date")}}
   />
+  {{#if this.errors.date}}
+    <span class="error-message">{{this.errors.date}}</span>
+  {{/if}}
 
   <label for="isbn">ISBN:</label>
   <input
     id="isbn"
     type="text"
     value={{@model.isbn}}
-    {{on "input" (fn (mut @model.isbn) value="target.value")}}
+    {{on "change" (fn this.updateField "isbn")}}
   />
+  {{#if this.errors.isbn}}
+    <span class="error-message">{{this.errors.isbn}}</span>
+  {{/if}}
 
-  <button type="button" {{on "click" this.saveBook}}>Save Changes</button>
+  <button type="button" {{on "click" this.saveBook}}>Save changes</button>
   <button type="button" {{on "click" this.cancel}}>Cancel</button>
 </div>
