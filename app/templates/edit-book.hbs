@@ -20,7 +20,7 @@
         @onUpdate={{this.updateAuthor}}
       />
     {{else}}
-      {{#each this.model.authors as |author|}}
+      {{#each this.authors as |author|}}
         <li>
           {{author.name}}
           <button type="button" {{on "click" (fn this.editAuthor author)}}>Edit</button>

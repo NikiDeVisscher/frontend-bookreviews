@@ -9,6 +9,7 @@ export default class EditBookController extends Controller {
   @tracked published = this.formatDate(this.model.date);
   @tracked editingAuthor = null;
   @tracked authors = {};
+  @tracked removedAuthors = {};
   @tracked errors = {};
 
   languages = [
@@ -24,6 +25,28 @@ export default class EditBookController extends Controller {
     'Arabic',
   ];
 
+  set model(value) {
+    this._model = value;
+    if (value) {
+      this.loadAuthors(value);
+    }
+  }
+
+  get model() {
+    return this._model;
+  }
+
+  async loadAuthors(book) {
+    const authors = await book.authors;
+    this.authors = [...authors];
+  }
+
+  prepareAuthors() {
+    this.model.authors.then((authors) => {
+      this.authors = [...authors];
+    });
+  }
+
   formatDate(date) {
     return date.toISOString().split('T')[0];
   }
@@ -35,21 +58,14 @@ export default class EditBookController extends Controller {
 
   @action
   removeAuthor(author) {
-    this.model.authors.then((authors) => {
-      this.authors = [...authors];
-      this.authors = this.authors.filter((a) => a.id !== author.id);
-      this.model.authors = this.authors;
-    });
+    this.removedAuthors[author.id] = author;
+    this.authors = this.authors.filter((a) => a.id !== author.id);
   }
 
   @action
   async updateAuthor(author) {
     this.editingAuthor = null;
-    try {
-      await author.save();
-    } catch (error) {
-      console.error('Error updating author:', error);
-    }
+    this.authors = this.authors.map((a) => (a.id === author.id ? author : a));
   }
 
   @action
@@ -64,6 +80,16 @@ export default class EditBookController extends Controller {
         return;
       }
 
+      for (let author of this.authors) {
+        await author.save();
+      }
+
+      for (let author in this.removedAuthors) {
+        this.removeBookFromAuthor(author);
+      }
+
+      this.model.authors = this.authors;
+
       await this.model.save();
       this.router.transitionTo('book', this.model.id);
     } catch (error) {
@@ -74,6 +100,17 @@ export default class EditBookController extends Controller {
   @action
   cancel() {
     this.router.transitionTo('book', this.model.id);
+  }
+
+  removeBookFromAuthor(author) {
+    if (author.books) {
+      author.books.then((books) => {
+        author.books = books.filter((b) => b.id !== this.model.id);
+        author.save().then(() => {
+          console.log('Author updated successfully');
+        });
+      });
+    }
   }
 
   validate() {
