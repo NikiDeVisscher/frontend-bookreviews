@@ -1,6 +1,6 @@
 {{#each @book.reviews as |review|}}
   <div class="review">
-    <h3>On {{review.datecreated}}</h3>
+    <h3>{{review.author.name}} on {{review.datecreated}}</h3>
     <p>{{review.reviewcontent}}</p>
     <p>Rating: {{review.reviewrating}}/5</p>
   </div>
