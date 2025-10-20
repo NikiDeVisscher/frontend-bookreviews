@@ -5,13 +5,13 @@ export default class NewReviewRoute extends Route {
   @service store;
   @service router;
 
-  setupController(controller) {
+  async setupController(controller) {
     super.setupController(...arguments);
 
     controller.newReview = {
       reviewcontent: '',
       reviewrating: null,
-      book: this.store.createRecord('book', {
+      book: await this.store.findRecord('book', {
         id: this.router.currentRoute.params.id,
       }),
       datecreated: new Date(),

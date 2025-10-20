@@ -2,14 +2,12 @@
 
 <h2>Add a review for {{@book.title}}</h2>
 
-<div class="form">
-  <form {{on "submit" this.submitReview}}>
-    <label for="rating">Rating (1-5):</label>
-    <input id="rating" type="number" min="1" max="5" {{on "input" this.updateRating}} />
+<form class="form" {{on "submit" this.submitReview}}>
+  <label for="rating">Rating (1-5):</label>
+  <input id="rating" type="number" min="1" max="5" {{on "input" this.updateRating}} />
 
-    <label for="content">Review:</label>
-    <textarea id="content" {{on "input" this.updateContent}} />
+  <label for="content">Review:</label>
+  <textarea id="content" {{on "input" this.updateContent}} />
 
-    <button type="submit">Submit review</button>
-  </form>
-</div>
+  <button type="submit">Submit review</button>
+</form>
