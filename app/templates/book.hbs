@@ -5,4 +5,6 @@
 <LinkTo @route="edit-book" @model={{@model}}>Edit</LinkTo>
 <a href="" {{on "click" this.deleteBook}}>Delete</a>
 
+<LinkTo @route="new-review">Add a review</LinkTo>
+
 <Reviews @book={{this.model}} />
