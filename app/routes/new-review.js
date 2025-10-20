@@ -11,9 +11,10 @@ export default class NewReviewRoute extends Route {
     controller.newReview = {
       reviewcontent: '',
       reviewrating: null,
-      book: await this.store.findRecord('book', {
-        id: this.router.currentRoute.params.id,
-      }),
+      book: await this.store.findRecord(
+        'book',
+        this.router.currentRoute.params.id,
+      ),
       datecreated: new Date(),
       author: null,
     };

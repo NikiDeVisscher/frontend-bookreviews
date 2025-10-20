@@ -1,8 +1,61 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 export default class NewReviewController extends Controller {
   @service store;
   @service router;
+
+  @tracked errors = {};
+
+  @action
+  updateField(field, event) {
+    this.newReview[field] = event.target.value;
+  }
+
+  @action
+  updateRating(event) {
+    this.newReview.reviewrating = parseInt(event.target.value, 10);
+  }
+
+  @action
+  async submitReview(event) {
+    event.preventDefault();
+
+    if (!this.validate()) {
+      return;
+    }
+
+    try {
+      const review = this.store.createRecord('review', this.newReview);
+      await review.save();
+      this.router.transitionTo('book', this.newReview.book.id);
+    } catch (error) {
+      console.error('Error saving review:', error);
+    }
+  }
+
+  validate() {
+    this.errors = {};
+    if (
+      !this.newReview.reviewcontent ||
+      this.newReview.reviewcontent.trim() === ''
+    ) {
+      this.errors.reviewcontent = 'Review content is required.';
+    }
+    if (
+      this.newReview.reviewrating == null ||
+      this.newReview.reviewrating < 1 ||
+      this.newReview.reviewrating > 5
+    ) {
+      this.errors.reviewrating = 'Rating must be between 1 and 5.';
+    }
+
+    if (Object.keys(this.errors).length) {
+      return false;
+    }
+
+    return true;
+  }
 }
