@@ -7,6 +7,7 @@ export default class NewReviewController extends Controller {
   @service store;
   @service router;
 
+  @tracked newReview = {};
   @tracked errors = {};
 
   @action
@@ -28,7 +29,14 @@ export default class NewReviewController extends Controller {
     }
 
     try {
-      const review = this.store.createRecord('review', this.newReview);
+      let review = this.store.createRecord('review', {
+        reviewcontent: this.newReview.reviewcontent,
+        reviewrating: this.newReview.reviewrating,
+        datecreated: this.newReview.datecreated,
+        author: this.newReview.author,
+        book: this.newReview.book,
+      });
+
       await review.save();
       this.router.transitionTo('book', this.newReview.book.id);
     } catch (error) {

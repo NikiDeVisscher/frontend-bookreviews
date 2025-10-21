@@ -1,6 +1,6 @@
 {{page-title "New Review"}}
 
-<h2>Add a review for {{@model.book.title}}</h2>
+<h2>Add a review for {{this.newReview.book.title}}</h2>
 
 <form class="form" {{on "submit" this.submitReview}}>
   <label for="rating">Rating (1-5):</label>
