@@ -8,6 +8,7 @@
     <p>{{review.reviewcontent}}</p>
     <p>Rating: {{review.reviewrating}}/5</p>
 
+    <button type="button" {{on "click" (fn this.editReview review)}}>Edit review</button>
     <button type="button" {{on "click" (fn this.deleteReview review)}}>Delete review</button>
   </div>
 {{/each}}
