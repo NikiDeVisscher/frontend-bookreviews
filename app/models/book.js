@@ -8,7 +8,7 @@ export default class BookModel extends Model {
   @attr pages;
   @attr language;
   @attr publisher;
-  @attr date;
+  @attr('date') date;
   @attr isbn;
   @attr averagerating;
 }

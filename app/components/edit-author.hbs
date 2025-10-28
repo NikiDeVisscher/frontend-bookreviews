@@ -1,0 +1,11 @@
+<div class="secondary-form">
+  <label for="name">Author name:</label>
+  <input
+    id="name"
+    type="text"
+    value={{@author.name}}
+    {{on "input" (fn this.updateField "name")}}
+  />
+
+  <button type="button" {{on "click" this.updateAuthor}}>Save author</button>
+</div>
