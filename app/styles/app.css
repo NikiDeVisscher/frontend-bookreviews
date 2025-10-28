@@ -10,3 +10,44 @@ td,
 th {
   padding: 10px;
 }
+
+button {
+  cursor: pointer;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+.form label {
+  font-weight: bold;
+}
+
+.form input,
+.form textarea {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.secondary-form {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.secondary-form label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
