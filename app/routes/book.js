@@ -5,6 +5,8 @@ export default class BookRoute extends Route {
   @service store;
 
   async model(params) {
-    return await this.store.findRecord('book', params.id);
+    const book = await this.store.findRecord('book', params.id);
+    await book.hasMany('reviews').load();
+    return book;
   }
 }
