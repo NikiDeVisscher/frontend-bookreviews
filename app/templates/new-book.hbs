@@ -62,7 +62,7 @@
   {{/if}}
 
   <label for="language">Language:</label>
-  <input id="language" type="text" value={{this.selectedLanguage}} {{on "input" (fn this.updateField "language")}} readonly />
+  <input id="language" type="text" value={{this.selectedLanguage}} readonly />
   <select
     id="language-select"
     size="5"
