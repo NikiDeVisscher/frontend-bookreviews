@@ -7,4 +7,8 @@
 
 <LinkTo @route="new-review" @model={{@model}}>Add a review</LinkTo>
 
+<h2>Reviews</h2>
+
+<p>Average rating: {{@model.averagerating}}</p>
+
 <Reviews @book={{this.model}} />
