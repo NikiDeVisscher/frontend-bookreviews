@@ -6,6 +6,7 @@ module.exports = function (environment) {
     environment,
     rootURL: '/',
     locationType: 'history',
+    basePath: '',
     EmberENV: {
       EXTEND_PROTOTYPES: false,
       FEATURES: {
@@ -26,6 +27,11 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.basePath = 'http://localhost/sessions';
+
+    ENV['ember-mu-registration'] = {
+      accountBasePath: 'http://localhost/accounts',
+    };
   }
 
   if (environment === 'test') {
