@@ -1,0 +1,23 @@
+{{page-title "Accounts"}}
+<h2>Accounts</h2>
+
+<DataTable
+  @content={{@model}}
+  @page={{this.page}}
+  @size={{this.size}}
+  as |t|>
+  <t.content as |c|>
+    <c.header>
+      <ThSortable @field='accountname' @label='Account Name' />
+      <ThSortable @field='status' @label='Status' />
+      <ThSortable @field='created' @label='Created on' />
+      <ThSortable @field='modified' @label='Modified on' />
+    </c.header>
+    <c.body as |row|>
+      <td>{{row.accountname}}</td>
+      <td>{{row.status}}</td>
+      <td>{{row.created}}</td>
+      <td>{{row.modified}}</td>
+    </c.body>
+  </t.content>
+</DataTable>

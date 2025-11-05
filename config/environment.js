@@ -30,7 +30,7 @@ module.exports = function (environment) {
     ENV.basePath = 'http://localhost/sessions';
 
     ENV['ember-mu-registration'] = {
-      accountBasePath: 'http://localhost/accounts',
+      accountBasePath: 'http://localhost/register-account',
     };
   }
 

@@ -16,4 +16,5 @@ Router.map(function () {
   this.route('edit-review', { path: '/edit-review/:id' });
   this.route('login');
   this.route('register');
+  this.route('accounts');
 });
