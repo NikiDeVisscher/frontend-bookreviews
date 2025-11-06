@@ -12,12 +12,21 @@
       <ThSortable @field='status' @label='Status' />
       <ThSortable @field='created' @label='Created on' />
       <ThSortable @field='modified' @label='Modified on' />
+      <th>Delete</th>
     </c.header>
     <c.body as |row|>
       <td>{{row.accountname}}</td>
       <td>{{row.status}}</td>
       <td>{{row.created}}</td>
       <td>{{row.modified}}</td>
+      <td>
+        <button
+          type="button"
+          {{on "click" (fn this.deleteAccount row)}}
+        >
+          Delete
+        </button>
+      </td>
     </c.body>
   </t.content>
 </DataTable>
