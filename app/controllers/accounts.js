@@ -10,10 +10,10 @@ export default class AccountsController extends Controller.extend(
   size = 10;
 
   @action
-  deleteAccount(account) {
+  deactivateAccount(account) {
     if (
       confirm(
-        `Are you sure you want to delete the account: ${account.accountname}?`,
+        `Are you sure you want to deactivate the account: ${account.accountname}?`,
       )
     ) {
       account.destroyRecord();

@@ -8,24 +8,34 @@
   as |t|>
   <t.content as |c|>
     <c.header>
-      <ThSortable @field='accountname' @label='Account Name' />
+      <ThSortable @field='nickname' @label='Account name' />
       <ThSortable @field='status' @label='Status' />
       <ThSortable @field='created' @label='Created on' />
       <ThSortable @field='modified' @label='Modified on' />
-      <th>Delete</th>
+      <th>Deactivate</th>
     </c.header>
     <c.body as |row|>
-      <td>{{row.accountname}}</td>
-      <td>{{row.status}}</td>
+      <td>
+        {{row.nickname}}
+      </td>
+      <td>
+        {{#if row.statusLabel}}
+          Active
+        {{else}}
+          Inactive
+        {{/if}}
+      </td>
       <td>{{row.created}}</td>
       <td>{{row.modified}}</td>
       <td>
-        <button
-          type="button"
-          {{on "click" (fn this.deleteAccount row)}}
-        >
-          Delete
-        </button>
+        {{#if row.statusLabel}}
+          <button
+            type="button"
+            {{on "click" (fn this.deactivateAccount row)}}
+          >
+            Deactivate
+          </button>
+        {{/if}}
       </td>
     </c.body>
   </t.content>
