@@ -1,4 +1,4 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, belongsTo } from '@ember-data/model';
 
 const STATUS_LABELS = {
   'http://mu.semte.ch/vocabularies/account/status/active': true,
@@ -12,6 +12,7 @@ export default class AccountModel extends Model {
   @attr status;
   @attr created;
   @attr modified;
+  @belongsTo('person', { async: true, inverse: 'accounts' }) person;
 
   get statusLabel() {
     return STATUS_LABELS[this.status];
