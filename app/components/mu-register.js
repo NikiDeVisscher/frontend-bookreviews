@@ -5,7 +5,7 @@ import { getOwner } from '@ember/application';
 import { tracked } from '@glimmer/tracking';
 
 export default class MyMuRegisterComponent extends MuRegister {
-  @service store;
+  @service currentUser;
   rolePath = '';
   @tracked errorMessage = null;
 
@@ -15,6 +15,10 @@ export default class MyMuRegisterComponent extends MuRegister {
     this.rolePath = config['rolePath'] || '/role';
     this.accountBasePath =
       config['ember-mu-registration']?.accountBasePath || '/accounts';
+  }
+
+  get allowRoleSelection() {
+    return this.currentUser.isAdmin;
   }
 
   @action
@@ -35,6 +39,11 @@ export default class MyMuRegisterComponent extends MuRegister {
   @action
   updatePasswordConfirmation(e) {
     this.passwordConfirmation = e.target.value;
+  }
+
+  @action
+  updateRole(e) {
+    this.role = e.target.value;
   }
 
   @action

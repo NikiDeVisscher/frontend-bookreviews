@@ -36,5 +36,13 @@
     type="password"
     {{on "input" this.updatePasswordConfirmation}} />
 
+  {{#if this.allowRoleSelection}}
+  <label for="role">Role</label>
+  <select id="role" {{on "change" this.updateRole}}>
+    <option value="reader">Reader</option>
+    <option value="admin">Admin</option>
+  </select>
+  {{/if}}
+
   <button type="submit">Register</button>
 </form>
