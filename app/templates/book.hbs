@@ -6,7 +6,7 @@
 <a href="" {{on "click" this.deleteBook}}>Delete</a>
 
 {{#if this.session.isAuthenticated}}
-  <LinkTo @route="new-review" @model={{@model}}>Add a review</LinkTo>
+    <a href="" {{on "click" this.navigateAddReview}}>Add a review</a>
 {{/if}}
 
 <h2>Reviews</h2>

@@ -5,6 +5,37 @@ import { service } from '@ember/service';
 export default class BookController extends Controller {
   @service router;
   @service session;
+  @service currentUser;
+
+  @action
+  async navigateAddReview(event) {
+    event.preventDefault();
+
+    if (await this.checkUserReview()) {
+      alert('You have already submitted a review for this book.');
+      return;
+    }
+
+    this.router.transitionTo('new-review', this.model.id);
+  }
+
+  async checkUserReview() {
+    const reviews = await this.model.reviews;
+    for (let review of reviews) {
+      await review.account;
+    }
+
+    const currentUser = this.currentUser.user;
+    let hasUserReview = false;
+
+    if (currentUser) {
+      hasUserReview = reviews.some(
+        (review) => review.account?.id === currentUser.id,
+      );
+    }
+
+    return hasUserReview;
+  }
 
   @action
   deleteBook(event) {
