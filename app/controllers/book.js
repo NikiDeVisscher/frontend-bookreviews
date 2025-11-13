@@ -4,6 +4,7 @@ import { service } from '@ember/service';
 
 export default class BookController extends Controller {
   @service router;
+  @service session;
 
   @action
   deleteBook(event) {

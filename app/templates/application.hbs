@@ -2,7 +2,11 @@
 
 <LinkTo @route="index">Home</LinkTo>
 <LinkTo @route="books">Show all books</LinkTo>
-<LinkTo @route="new-book">Create a new book</LinkTo>
+
+{{#if this.currentUser.isAdmin}}
+  <LinkTo @route="new-book">Create a new book</LinkTo>
+  <LinkTo @route="accounts">Accounts</LinkTo>
+{{/if}}
 
 {{#if this.session.isAuthenticated}}
   <LinkTo @route="account">My account</LinkTo>
@@ -10,7 +14,5 @@
   <LinkTo @route="login">Login</LinkTo>
 {{/if}}
 <LinkTo @route="register">Register</LinkTo>
-
-<LinkTo @route="accounts">Accounts</LinkTo>
 
 {{outlet}}

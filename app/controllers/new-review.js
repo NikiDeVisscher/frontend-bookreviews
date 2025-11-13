@@ -6,6 +6,7 @@ import { tracked } from '@glimmer/tracking';
 export default class NewReviewController extends Controller {
   @service store;
   @service router;
+  @service currentUser;
 
   @tracked newReview = {};
   @tracked errors = {};
@@ -28,12 +29,16 @@ export default class NewReviewController extends Controller {
       return;
     }
 
+    if (this.currentUser.user) {
+      this.newReview.account = this.currentUser.user;
+    }
+
     try {
       let review = this.store.createRecord('review', {
         reviewcontent: this.newReview.reviewcontent,
         reviewrating: this.newReview.reviewrating,
         datecreated: this.newReview.datecreated,
-        author: this.newReview.author,
+        account: this.newReview.account,
         book: this.newReview.book,
       });
 
