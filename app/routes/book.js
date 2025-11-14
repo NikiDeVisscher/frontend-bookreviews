@@ -8,6 +8,7 @@ export default class BookRoute extends Route {
     const book = await this.store.findRecord('book', params.id, {
       include: 'reviews',
     });
+
     return book;
   }
 }

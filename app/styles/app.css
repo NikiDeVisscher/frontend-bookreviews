@@ -52,6 +52,11 @@ button {
   font-size: 12px;
 }
 
+.success-message {
+  color: green;
+  font-size: 12px;
+}
+
 .review {
   border: 1px solid #ddd;
   padding: 5px 10px;

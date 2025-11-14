@@ -16,7 +16,7 @@ export default class NewReviewRoute extends Route {
       reviewrating: null,
       book: book,
       datecreated: new Date(),
-      author: null,
+      account: null,
     };
   }
 }

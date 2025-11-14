@@ -3,6 +3,7 @@
 <div class="account">
   <p>Name: {{@model.person.name}}</p>
   <p>Account name: {{@model.nickname}}</p>
+  <p>Role: {{@model.role}}</p>
   <p>created on: {{@model.created}}</p>
 
   <button type="button" {{on "click" this.editAccount}}>Edit account details</button>
