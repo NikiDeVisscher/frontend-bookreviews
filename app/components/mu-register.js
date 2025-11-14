@@ -8,6 +8,8 @@ export default class MyMuRegisterComponent extends MuRegister {
   @service currentUser;
   rolePath = '';
   @tracked errorMessage = null;
+  @tracked successMessage = null;
+  @tracked loading = false;
 
   constructor() {
     super(...arguments);
@@ -49,6 +51,7 @@ export default class MyMuRegisterComponent extends MuRegister {
   @action
   async registerAccount(e) {
     e.preventDefault();
+    this.successMessage = null;
     this.loading = true;
     this.errorMessage = null;
     const id = await this.register();
@@ -105,5 +108,6 @@ export default class MyMuRegisterComponent extends MuRegister {
     });
 
     this.loading = false;
+    this.successMessage = 'Registration successful!';
   }
 }

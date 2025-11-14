@@ -5,6 +5,9 @@
   {{#if this.errorMessage}}
     <span class="error-message">{{this.errorMessage}}</span>
   {{/if}}
+  {{#if this.successMessage}}
+    <span class="success-message">{{this.successMessage}}</span>
+  {{/if}}
 </div>
 
 <form class="form" {{on "submit" this.registerAccount}}>
@@ -37,11 +40,11 @@
     {{on "input" this.updatePasswordConfirmation}} />
 
   {{#if this.allowRoleSelection}}
-  <label for="role">Role</label>
-  <select id="role" {{on "change" this.updateRole}}>
-    <option value="reader">Reader</option>
-    <option value="admin">Admin</option>
-  </select>
+    <label for="role">Role</label>
+    <select id="role" {{on "change" this.updateRole}}>
+      <option value="reader">Reader</option>
+      <option value="admin">Admin</option>
+    </select>
   {{/if}}
 
   <button type="submit">Register</button>
