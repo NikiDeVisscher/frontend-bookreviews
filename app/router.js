@@ -12,4 +12,5 @@ Router.map(function () {
   this.route('book', { path: '/books/:id' });
   this.route('new-book');
   this.route('edit-book', { path: '/edit-book/:id' });
+  this.route('new-review', { path: '/new-review/:id' });
 });
