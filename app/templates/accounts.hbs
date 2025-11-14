@@ -1,0 +1,42 @@
+{{page-title "Accounts"}}
+<h2>Accounts</h2>
+
+<DataTable
+  @content={{@model}}
+  @page={{this.page}}
+  @size={{this.size}}
+  as |t|>
+  <t.content as |c|>
+    <c.header>
+      <ThSortable @field='nickname' @label='Account name' />
+      <ThSortable @field='status' @label='Status' />
+      <ThSortable @field='created' @label='Created on' />
+      <ThSortable @field='modified' @label='Modified on' />
+      <th>Deactivate</th>
+    </c.header>
+    <c.body as |row|>
+      <td>
+        {{row.nickname}}
+      </td>
+      <td>
+        {{#if row.statusLabel}}
+          Active
+        {{else}}
+          Inactive
+        {{/if}}
+      </td>
+      <td>{{row.created}}</td>
+      <td>{{row.modified}}</td>
+      <td>
+        {{#if row.statusLabel}}
+          <button
+            type="button"
+            {{on "click" (fn this.deactivateAccount row)}}
+          >
+            Deactivate
+          </button>
+        {{/if}}
+      </td>
+    </c.body>
+  </t.content>
+</DataTable>

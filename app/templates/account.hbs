@@ -1,0 +1,31 @@
+{{page-title "Account"}}
+
+<div class="account">
+  <p>Name: {{@model.person.name}}</p>
+  <p>Account name: {{@model.nickname}}</p>
+  <p>created on: {{@model.created}}</p>
+
+  <button type="button" {{on "click" this.editAccount}}>Edit account details</button>
+</div>
+
+{{#if this.isEditing}}
+  <div class="account">
+    <form class="form" {{on "submit" this.saveAccount}}>
+      <label for="nickname">Account name</label>
+      <input id="nickname" type="text" value={{this.updatedAccount.nickname}} {{on "change" (fn this.updateField "nickname")}} />
+
+      <label for="password">Enter password for validation:</label>
+      <input id="password" type="password" value={{this.updatedAccount.password}} {{on "change" (fn this.updateField "password")}} />
+
+      <button type="submit">Save changes</button>
+    </form>
+  </div>
+{{/if}}
+
+<div class="account">
+  <MuChangePassword />
+</div>
+
+<div class="account">
+  <MuLogout />
+</div>

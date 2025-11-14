@@ -4,4 +4,13 @@
 <LinkTo @route="books">Show all books</LinkTo>
 <LinkTo @route="new-book">Create a new book</LinkTo>
 
+{{#if this.session.isAuthenticated}}
+  <LinkTo @route="account">My account</LinkTo>
+{{else}}
+  <LinkTo @route="login">Login</LinkTo>
+  <LinkTo @route="register">Register</LinkTo>
+{{/if}}
+
+<LinkTo @route="accounts">Accounts</LinkTo>
+
 {{outlet}}
