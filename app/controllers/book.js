@@ -11,12 +11,16 @@ export default class BookController extends Controller {
   async navigateAddReview(event) {
     event.preventDefault();
 
-    if (await this.checkUserReview()) {
-      alert('You have already submitted a review for this book.');
-      return;
-    }
+    if (this.session.isAuthenticated) {
+      if (await this.checkUserReview()) {
+        alert('You have already submitted a review for this book.');
+        return;
+      }
 
-    this.router.transitionTo('new-review', this.model.id);
+      this.router.transitionTo('new-review', this.model.id);
+    } else {
+      this.router.transitionTo('login');
+    }
   }
 
   async checkUserReview() {

@@ -4,10 +4,7 @@
 
 <LinkTo @route="edit-book" @model={{@model}}>Edit</LinkTo>
 <a href="" {{on "click" this.deleteBook}}>Delete</a>
-
-{{#if this.session.isAuthenticated}}
-  <a href="" {{on "click" this.navigateAddReview}}>Add a review</a>
-{{/if}}
+<a href="" {{on "click" this.navigateAddReview}}>Add a review</a>
 
 <h2>Reviews</h2>
 
