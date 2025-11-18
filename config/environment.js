@@ -34,6 +34,12 @@ module.exports = function (environment) {
     ENV['ember-mu-registration'] = {
       accountBasePath: 'http://localhost/accounts',
     };
+
+    ENV['ember-simple-auth'] = {
+      crossOriginWhitelist: ['http://localhost'],
+      useSession: true,
+      store: 'session-store:cookie',
+    };
   }
 
   if (environment === 'test') {
