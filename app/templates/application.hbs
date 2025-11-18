@@ -10,9 +10,13 @@
 
 {{#if this.session.isAuthenticated}}
   <LinkTo @route="account">My account</LinkTo>
+
+  {{#if this.currentUser.isAdmin}}
+    <LinkTo @route="register">Register</LinkTo>
+  {{/if}}
 {{else}}
   <LinkTo @route="login">Login</LinkTo>
+  <LinkTo @route="register">Register</LinkTo>
 {{/if}}
-<LinkTo @route="register">Register</LinkTo>
 
 {{outlet}}
