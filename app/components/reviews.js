@@ -15,6 +15,7 @@ export default class Reviews extends Component {
     this.loadUserReviews();
   }
 
+  @action
   async loadUserReviews() {
     const currentUser = this.currentUser.user;
     const reviews = await this.args.book.reviews;
@@ -26,6 +27,12 @@ export default class Reviews extends Component {
       this.userReviews = reviews.filter(
         (review) => review.account.id === currentUser.id,
       );
+
+      if (this.userReviews.length > 0) {
+        this.args.onReviewExists(true);
+      } else {
+        this.args.onReviewExists(false);
+      }
 
       this.otherReviews = reviews.filter(
         (review) => review.account.id !== currentUser.id,
