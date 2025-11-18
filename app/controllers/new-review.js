@@ -7,6 +7,7 @@ export default class NewReviewController extends Controller {
   @service store;
   @service router;
   @service currentUser;
+  @service session;
 
   @tracked newReview = {};
   @tracked errors = {};
@@ -27,6 +28,14 @@ export default class NewReviewController extends Controller {
 
     if (!this.validate()) {
       return;
+    }
+
+    if (!this.session.isAuthenticated) {
+      return;
+    }
+
+    if (!this.currentUser.user) {
+      await this.currentUser.load();
     }
 
     if (this.currentUser.user) {

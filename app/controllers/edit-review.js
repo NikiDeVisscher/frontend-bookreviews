@@ -37,7 +37,7 @@ export default class EditReviewController extends Controller {
 
   @action
   cancel() {
-    this.router.transitionTo('book', this.model.id);
+    this.router.transitionTo('book', this.model.book.id);
   }
 
   validate() {

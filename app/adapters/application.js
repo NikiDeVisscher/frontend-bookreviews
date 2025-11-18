@@ -1,7 +1,3 @@
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
 
-export default class ApplicationAdapter extends JSONAPIAdapter {
-  host = 'http://localhost';
-  namespace = '';
-  port = 80;
-}
+export default class ApplicationAdapter extends JSONAPIAdapter {}

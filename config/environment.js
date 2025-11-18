@@ -20,6 +20,10 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+
+    'ember-mu-registration': {
+      accountBasePath: '/accounts',
+    },
   };
 
   if (environment === 'development') {
@@ -28,7 +32,7 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.basePath = 'http://localhost/sessions';
+    /*ENV.basePath = 'http://localhost/sessions';
     ENV.rolePath = 'http://localhost/role';
 
     ENV['ember-mu-registration'] = {
@@ -39,7 +43,7 @@ module.exports = function (environment) {
       crossOriginWhitelist: ['http://localhost'],
       useSession: true,
       store: 'session-store:cookie',
-    };
+    };*/
   }
 
   if (environment === 'test') {
