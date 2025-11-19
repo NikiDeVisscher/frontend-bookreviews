@@ -1,10 +1,23 @@
-{{#each @book.reviews as |review|}}
+{{#if this.userReviews.length}}
+  <h3>Your review:</h3>
+
+  {{#each this.userReviews as |review|}}
+    <div class="review">
+      <h3>{{review.account.nickname}} on {{review.datecreated}}</h3>
+      <p>{{review.reviewcontent}}</p>
+      <p>Rating: {{review.reviewrating}}/5</p>
+
+      <button type="button" {{on "click" (fn this.editReview review)}}>Edit review</button>
+      <button type="button" {{on "click" (fn this.deleteReview review)}}>Delete review</button>
+    </div>
+  {{/each}}
+{{/if}}
+
+<h3>Others' reviews:</h3>
+{{#each this.otherReviews as |review|}}
   <div class="review">
-    <h3>{{review.author.name}} on {{review.datecreated}}</h3>
+    <h3>{{review.account.nickname}} on {{review.datecreated}}</h3>
     <p>{{review.reviewcontent}}</p>
     <p>Rating: {{review.reviewrating}}/5</p>
-
-    <button type="button" {{on "click" (fn this.editReview review)}}>Edit review</button>
-    <button type="button" {{on "click" (fn this.deleteReview review)}}>Delete review</button>
   </div>
 {{/each}}

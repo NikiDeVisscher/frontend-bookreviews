@@ -5,5 +5,5 @@ export default class ReviewModel extends Model {
   @attr reviewrating;
   @attr('date') datecreated;
   @belongsTo('book', { async: true, inverse: 'reviews' }) book;
-  @belongsTo('author', { async: true, inverse: null }) author;
+  @belongsTo('account', { async: true, inverse: 'reviews' }) account;
 }

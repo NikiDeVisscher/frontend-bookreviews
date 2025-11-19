@@ -7,6 +7,7 @@ module.exports = function (environment) {
     rootURL: '/',
     locationType: 'history',
     basePath: '/sessions',
+    rolePath: '/role',
     EmberENV: {
       EXTEND_PROTOTYPES: false,
       FEATURES: {
@@ -28,6 +29,7 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.basePath = 'http://localhost/sessions';
+    ENV.rolePath = 'http://localhost/role';
 
     ENV['ember-mu-registration'] = {
       accountBasePath: 'http://localhost/accounts',

@@ -13,6 +13,8 @@ export default class AccountModel extends Model {
   @attr created;
   @attr modified;
   @belongsTo('person', { async: true, inverse: 'accounts' }) person;
+  @attr role;
+  @belongsTo('review', { async: true, inverse: 'account' }) reviews;
 
   get statusLabel() {
     return STATUS_LABELS[this.status];

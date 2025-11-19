@@ -2,13 +2,21 @@
 
 <BookDetails @book={{this.model}} />
 
-<LinkTo @route="edit-book" @model={{@model}}>Edit</LinkTo>
-<a href="" {{on "click" this.deleteBook}}>Delete</a>
+{{#if this.currentUser.isAdmin}}
+  <LinkTo @route="edit-book" @model={{@model}}>Edit</LinkTo>
+  <button type="button" {{on "click" this.deleteBook}}>Delete</button>
+{{/if}}
 
-<LinkTo @route="new-review" @model={{@model}}>Add a review</LinkTo>
+{{#if this.session.isAuthenticated}}
+  {{#unless this.hasUserReview}}
+    <LinkTo @route="new-review" @model={{@model}}>Add a review</LinkTo>
+  {{/unless}}
+{{else}}
+  <p><LinkTo @route="login">Log in</LinkTo> to add a review.</p>
+{{/if}}
 
 <h2>Reviews</h2>
 
 <p>Average rating: {{@model.averagerating}}</p>
 
-<Reviews @book={{this.model}} />
+<Reviews @book={{this.model}} @onReviewExists={{this.handleReviewExists}} />
